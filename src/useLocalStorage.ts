@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function useLocalStorage<T>(key: string, initialValue: T) {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = () => {
     // Prevent build error "window is undefined" but keep keep working
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return initialValue;
     }
     try {
@@ -24,7 +24,7 @@ export default function useLocalStorage<T>(key: string, initialValue: T) {
   // ... persists the new value to localStorage.
   const setValue = (value: T) => {
     // Prevent build error "window is undefined" but keep keep working
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`
       );
@@ -37,7 +37,7 @@ export default function useLocalStorage<T>(key: string, initialValue: T) {
       // Save state
       setStoredValue(newValue);
       // We dispatch a custom event so every useLocalStorage hook are notified
-      window.dispatchEvent(new Event('local-storage'));
+      window.dispatchEvent(new Event("local-storage"));
     } catch (error) {
       console.warn(`Error setting localStorage key “${key}”:`, error);
     }
@@ -53,13 +53,13 @@ export default function useLocalStorage<T>(key: string, initialValue: T) {
     };
 
     // this only works for other documents, not the current one
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
     // this is a custom event, triggered in writeValueToLocalStorage
-    window.addEventListener('local-storage', handleStorageChange);
+    window.addEventListener("local-storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('local-storage', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("local-storage", handleStorageChange);
     };
   }, []);
   return [storedValue, setValue];

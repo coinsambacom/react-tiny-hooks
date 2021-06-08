@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import useIsClient from './useIsClient';
+import { useEffect, useState } from "react";
+import useIsClient from "./useIsClient";
 
 interface IGetDevice {
   isMobile: boolean;
@@ -36,7 +36,7 @@ export default function useDeviceDetect() {
   const isClient = useIsClient();
 
   useEffect(() => {
-    const userAgent = isClient ? navigator.userAgent : 'SSR';
+    const userAgent = isClient ? navigator.userAgent : "SSR";
 
     setDevice(getDevice(userAgent));
   }, [isClient]);

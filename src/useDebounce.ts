@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from "react";
 
 export default function useDebounce(
   effect: (...args: any[]) => any,
