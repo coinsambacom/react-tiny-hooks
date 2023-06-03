@@ -39,7 +39,7 @@ export default function useDeviceDetect() {
     const userAgent = isClient ? navigator.userAgent : "SSR";
 
     setDevice(getDevice(userAgent));
-  }, [isClient]);
+  }, [isClient, setDevice]);
 
   return device;
 }
